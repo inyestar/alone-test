@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.inminhouse.alone</groupId>
+	<artifactId>user</artifactId>
+	<!-- SNAPSHOT 접미사가 붙을 경우 아직 개발 단계라는 의미로 메이븐에서 라이브러리를 관리하는 방식이 다름 -->
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>user</name>
+	<description>ALONE User Microservice for Spring Boot</description>
+	<!-- pom에서 중복으로 사용되는 설정을 지정하는 부분으로 ${}로 바인딩하여 사용할 수 있음 -->
+	<properties>
+		<java.version>15</java.version>
+	</properties>
+	<!-- 
+		parent 태그는 pom.xml을 상속받도록 한다. 
+		starter가 의존성 조합을 제공한다면 starter-parent는 충돌 문제가 없는 검증 된 버전 정보 조합을 제공
+	 -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<dependencies>
+		<!-- 
+			Set of dependency descriptors
+			starter 의존성을 사용하면 관련 모듈의 모든 의존성 조합이 추가된다. 
+			이미 사전에 의존성간의 버전 조합을 테스트한 뒤 공개한다.
+			부모 pom.xml에 이미 버전 정보가 있으므로 version을 따로 지정할 필요가 없음
+			예) aspectj의 aop를 사용할 경우
+			   boot 이전 : org.springframework:spring-aop, org.aspectj.aspectjeaver 등 의존성 필요
+			   boot 이후 : spring-boot-starter-aop 의존성만 추가하면 됨
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<!-- 
+		** maven 라이프 사이클
+		- default
+			ㄴ process-resources : resource 디렉토리에 있는 내용을 target/classes로 복사
+			ㄴ compile : src/java 밑의 모든 자바 소스를 컴파일항 target/classes로 복사
+			ㄴ test-compile : test/java의 내용을 target/text-classes로 복사
+		 	ㄴ test : target/test-classes에 있는 테스트케이스의 단위 테스트 진행  
+		 	ㄴ package : target 디렉토리 하위에 jar 등 패키지 파일을 생성하여 <build>의 <fileName>의 값을 사용
+		 	ㄴ install : 로컬 저장소에 배포
+		 	ㄴ deploy : 원격 저장소로 배포
+		- clean
+			ㄴ clean : 빌드 과정에서 생긴 target 디렉토리 내용 삭제
+		- site
+			ㄴ site : target/site에 문서 사이트 생성
+			ㄴ site-deploy : 문서 사이트를 서버로 배포
+		** 프로퍼티
+		- fileName : 빌드 결과물 파일명
+		- resources : 리소스의 위치 지정 default src/main/resources
+		- testResources : 테스트 리소스의 위치 지정 default src/test/resources
+		- repositories : 빌드할 때 접근할 저장소의 위치 지정 default 메이븐 중앙 저장소
+		- outputDirectory : 컴파일한 결과물 위치값 지정 default target/classes
+		- testOutputDirectory : 테스트 소스 컴파일한 결과물 위치값 지정 default/target/test-classes
+		- plugin : 액션 하나 담당
+	 -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
