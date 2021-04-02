@@ -1,0 +1,8 @@
+spring.application.name: user
+spring.profiles.active: dev
+spring.cloud.config.uri: http://localhost:8888
+encrypt:
+  keyStore:
+    location: classpath:config-server-user.jks
+    password: freeus
+    alias: alone-config-user
