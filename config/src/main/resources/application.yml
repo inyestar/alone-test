@@ -1,22 +1,0 @@
-server:
-  port: 8888
-spring:
-  cloud:
-    config:
-      server:
-        git:
-          ignoreLocalSshSettings: true
-          uri: https://github.com/inyestar/alone-config.git#          username: 
-#          password: 
-#          hostKey: 
-#          hostKeyAlgorithm: 
-#          privateKey:
-          searchPaths: '{application}'
-# spring-cloud-starter-bootstrap 디팬던시 없으면 bootstrap.yml에 keystore 프로퍼티 넣었을 때 인식 못함 
-# TextEncryptorConfigBootstrapper [entry] - keysConfigured(KeyProperties) 에서 확인 가능
-#encrypt:
-#  keyStore:
-#    location: classpath:config-server-user.jks
-#    password: freeus
-#    alias: alone-config-user
-logging:  level:    ROOT: INFO
