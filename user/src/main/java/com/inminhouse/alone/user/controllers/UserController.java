@@ -37,9 +37,14 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/put")
-	// XX: Entity 객체를 POJO로 바꾸는 것이 필요 데이터 인젝션 발생 위험 잇음
+	// XX: Entity 객체를 POJO로 바꾸는 것이 필요 sql 인젝션 발생 위험 잇음
 	public User putUser(UserForm requestedUser) {
 
 		return userService.saveUser(requestedUser);
+	}
+
+	@GetMapping(value = "/{uid}/{clientType}")
+	public User getUserWithClient(@PathVariable("uid") String uid, @PathVariable("clientType") String clientType) {
+		return userService.getUserWithClient(uid, clientType);
 	}
 }

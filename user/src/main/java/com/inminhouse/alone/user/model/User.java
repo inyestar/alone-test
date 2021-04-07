@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -33,5 +34,8 @@ public class User {
 
 	@Column(name = "name", nullable = false)
 	private String name;
+
+	@Transient
+	private Calendar calendar;
 
 }
