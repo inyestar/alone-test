@@ -2,6 +2,7 @@ package com.inminhouse.alone.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableFeignClients // netflix가 더이상 내부적으로 feign을 사용하지 않기로 결정하여 전체 코드를 openfeign 오픈소스로 넘김
 // @EnableDiscoveryClient // 스프링 프레임워크가 관리하는 RestTemplate에 리본이 활성화된 인터셉터가 주입된다.
 //@RefreshScope // 사용자 정의 스프링 프로퍼티만 재로딩하며 스프링 데이터에서 정의된 구성(데이터베이스정보)는 재로딩 안됨, 업데이트 수행을 위해
+@EnableCircuitBreaker // 스프링 클라우드에 이 서비스에서 히스트릭스를 사용할 것이라고 지정한다.
 public class UserApplication {
 
 	/*

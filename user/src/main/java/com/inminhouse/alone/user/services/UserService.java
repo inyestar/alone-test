@@ -2,12 +2,14 @@ package com.inminhouse.alone.user.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.inminhouse.alone.user.clients.CalendarDiscoveryClient;
 import com.inminhouse.alone.user.clients.CalendarFeignClient;
@@ -16,6 +18,7 @@ import com.inminhouse.alone.user.form.UserForm;
 import com.inminhouse.alone.user.model.Calendar;
 import com.inminhouse.alone.user.model.User;
 import com.inminhouse.alone.user.repository.UserRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
 public class UserService {
@@ -57,8 +60,25 @@ public class UserService {
 	 * @param uid
 	 * @return
 	 */
+	@HystrixCommand // 메서드를 감싸는 프록시를 동정으로 생성, 원격 호출을 처리하기 위해 확보한 스레드가 있는 스레드 풀로 해당 메서드에 대한 모든 호출을 관리
 	public Optional<User> getUser(String uid) {
+		randomlyRunLong();
 		return userRepository.findById(uid);
+	}
+
+	/**
+	 * 무작위 타임아웃 생성
+	 */
+	private void randomlyRunLong() {
+		Random random = new Random();
+		int cnt = random.nextInt((3 - 1) + 1) + 1;
+		if (cnt == 3) {
+			try {
+				Thread.sleep(11000); // 히스트릭스는 기본적으로 1초 후에 호출을 타임아웃 한다.
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public User getUserWithClient(String uid, String clientType) {
@@ -68,7 +88,8 @@ public class UserService {
 				.build());
 
 		List<Calendar> calendar = retrieveCalendar(uid, clientType);
-		user.setCalendar(calendar.get(0));
+		user.setCalendar(CollectionUtils.isEmpty(calendar) ? Calendar.builder()
+			.build() : calendar.get(0));
 
 		return user;
 	}

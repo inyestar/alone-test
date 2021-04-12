@@ -16,6 +16,7 @@ public class CalendarRestTemplateClient {
 	@Autowired
 	private RestTemplate restTemplate;
 
+	// TODO: 리본이 가용 서비스 위치 풀에서 문제가 된 서비스 인스턴스를 제거하는지 테스트
 	public List<Calendar> getCalendar(String uid) {
 		return Arrays.asList(restTemplate
 			// 유레카 서비스 id로 url 생성
