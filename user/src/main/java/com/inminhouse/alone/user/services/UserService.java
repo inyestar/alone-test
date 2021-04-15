@@ -18,7 +18,6 @@ import com.inminhouse.alone.user.form.UserForm;
 import com.inminhouse.alone.user.model.Calendar;
 import com.inminhouse.alone.user.model.User;
 import com.inminhouse.alone.user.repository.UserRepository;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
 public class UserService {
@@ -60,7 +59,8 @@ public class UserService {
 	 * @param uid
 	 * @return
 	 */
-	@HystrixCommand // 메서드를 감싸는 프록시를 동정으로 생성, 원격 호출을 처리하기 위해 확보한 스레드가 있는 스레드 풀로 해당 메서드에 대한 모든 호출을 관리
+
+	// 메서드를 감싸는 프록시를 동정으로 생성, 원격 호출을 처리하기 위해 확보한 스레드가 있는 풀로 스레드 해당 메서드에 대한 모든 호출을 관리
 	public Optional<User> getUser(String uid) {
 		randomlyRunLong();
 		return userRepository.findById(uid);
