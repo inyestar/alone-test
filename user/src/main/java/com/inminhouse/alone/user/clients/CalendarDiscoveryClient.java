@@ -40,7 +40,7 @@ public class CalendarDiscoveryClient {
 		// RestTemplate을 autowired로 주입하지 않고 바로 인스턴스화하는 이유는
 		// 부트스트랩 클래스에서 EnableDiscoveryClient 애너테이션을 붙이면 스프링 프레임워크가 관리하는 모든
 		// RestTemplate에 리본이 활성화된 인터셉트가 주입되기때문에 DiscoveryClient만 이용하여 테스트 하기 위함
-		ResponseEntity<Calendar[]> restExchange = new RestTemplate().exchange(String.format("%s/v1/alone/calendar/%s",
+		ResponseEntity<Calendar[]> restExchange = new RestTemplate().exchange(String.format("%s/v1/calendar/%s",
 				instances.get(0)
 					.getUri()
 					.toString(),

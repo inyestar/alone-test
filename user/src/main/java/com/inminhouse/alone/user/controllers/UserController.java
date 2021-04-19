@@ -22,7 +22,7 @@ import com.inminhouse.alone.user.services.UserService;
  *
  */
 @RestController // REST 기반 서비스임을 명시하고 요청 및 응답을 json으로 자동 직렬 및 역직렬화 한다.
-@RequestMapping(value = "/v1/alone/user") // 서비스의 HTTP 엔드포인트를 외부에 공개한다고 알림
+@RequestMapping(value = "/v1/user") // 서비스의 HTTP 엔드포인트를 외부에 공개한다고 알림
 public class UserController {
 
 	@Autowired

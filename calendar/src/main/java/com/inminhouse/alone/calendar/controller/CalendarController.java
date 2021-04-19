@@ -12,7 +12,7 @@ import com.inminhouse.alone.calendar.model.Calendar;
 import com.inminhouse.alone.calendar.services.CalendarService;
 
 @RestController
-@RequestMapping(value = "/v1/alone/calendar")
+@RequestMapping(value = "/v1/calendar")
 public class CalendarController {
 
 	@Autowired

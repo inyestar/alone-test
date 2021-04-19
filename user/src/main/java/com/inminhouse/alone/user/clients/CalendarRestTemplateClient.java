@@ -22,7 +22,7 @@ public class CalendarRestTemplateClient {
 	public List<Calendar> getCalendar(String uid) {
 		return Arrays.asList(restTemplate
 			// 유레카 서비스 id로 url 생성
-			.exchange("http://calendar/v1/alone/calendar/{uid}", HttpMethod.GET, null, Calendar[].class, uid)
+			.exchange("http://calendar/v1/calendar/{uid}", HttpMethod.GET, null, Calendar[].class, uid)
 			.getBody());
 	}
 
@@ -33,6 +33,7 @@ public class CalendarRestTemplateClient {
 	 * @param uid
 	 * @return
 	 */
+	@SuppressWarnings(value = { "unused" }) // refereced by Hystrix
 	private List<Calendar> buildFallbackCalendar(String uid) {
 		return Arrays.asList(Calendar.builder()
 			.cid("NULL")
