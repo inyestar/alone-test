@@ -3,7 +3,7 @@
 ### Featurs
 
 ### Background
-** WebSocket
+* WebSocket
   - bidirectional data transmission on the web
   - HTML5
   - full-duplex communication channels over a single TCP connection 
@@ -18,7 +18,7 @@
 	    </code>
     </pre>
 
-** STOMP
+* STOMP
   - WebSocket protocol there is simply not enough information in an incoming message for a framework or container to know how to route it or process it.
     For this reason the WebSocket RFC defines the use of sub-protocols. During the handshake, the client and server can use the header Sec-WebSocket-Protocol to agree on a sub-protocol, i.e. a higher, application-level protocol to use.
     The Spring Framework provides support for using STOMP
@@ -26,7 +26,7 @@
   - STOMP clients can communicate with any STOMP message broker
   - default encoding for STOMP is UTF-8
  
-** references
+### references
   - [WebSocket](https://en.wikipedia.org/wiki/WebSocket)
   - [Spring WebSocket](https://docs.spring.io/spring-framework/docs/4.3.x/spring-framework-reference/html/websocket.html#websocket-intro)
   - [STOMP](https://stomp.github.io/stomp-specification-1.2.html#Background)
